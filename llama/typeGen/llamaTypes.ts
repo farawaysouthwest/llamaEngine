@@ -15,6 +15,7 @@ export type Scalars = {
 
 export type Llama = {
   __typename?: 'Llama';
+  bugTest: Scalars['Boolean'];
   furColor: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -112,6 +113,7 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type LlamaResolvers<ContextType = any, ParentType extends ResolversParentTypes['Llama'] = ResolversParentTypes['Llama']> = ResolversObject<{
+  bugTest?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   furColor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

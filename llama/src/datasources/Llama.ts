@@ -12,6 +12,7 @@ export default class LlamaDatasource extends DataSource {
         id: "1",
         furColor: "brown",
         name: "Cusco",
+        bugTest: false,
       },
     ];
 

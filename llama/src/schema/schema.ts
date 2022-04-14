@@ -9,5 +9,6 @@ export default gql`
     id: ID!
     name: String!
     furColor: String!
+    bugTest: Boolean!
   }
 `;

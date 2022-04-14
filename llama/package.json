@@ -10,7 +10,7 @@
     "test": "jest",
     "watch": "jest --watch",
     "build": "rimraf ./build && tsc",
-    "start": "node build/main.js",
+    "start": "node main.js",
     "codegen": "graphql-codegen"
   },
   "dependencies": {
