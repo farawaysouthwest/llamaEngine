@@ -13,16 +13,22 @@ export type Scalars = {
   Float: number;
 };
 
+export enum Color {
+  Black = 'black',
+  Brown = 'brown'
+}
+
 export type Llama = {
   __typename?: 'Llama';
-  furColor: Scalars['String'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
+  saddle?: Maybe<Saddle>;
+  saddleId: Scalars['ID'];
 };
 
-export type Query = {
-  __typename?: 'Query';
-  llamas: Array<Llama>;
+export type Saddle = {
+  __typename?: 'Saddle';
+  color: Color;
+  id: Scalars['ID'];
+  name: Scalars['String'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -96,9 +102,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Color: Color;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Llama: ResolverTypeWrapper<Llama>;
-  Query: ResolverTypeWrapper<{}>;
+  Saddle: ResolverTypeWrapper<Saddle>;
   String: ResolverTypeWrapper<Scalars['String']>;
 }>;
 
@@ -107,23 +114,25 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
   ID: Scalars['ID'];
   Llama: Llama;
-  Query: {};
+  Saddle: Saddle;
   String: Scalars['String'];
 }>;
 
 export type LlamaResolvers<ContextType = any, ParentType extends ResolversParentTypes['Llama'] = ResolversParentTypes['Llama']> = ResolversObject<{
-  furColor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  saddle?: Resolver<Maybe<ResolversTypes['Saddle']>, ParentType, ContextType>;
+  saddleId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type SaddleResolvers<ContextType = any, ParentType extends ResolversParentTypes['Saddle'] = ResolversParentTypes['Saddle']> = ResolversObject<{
+  color?: Resolver<ResolversTypes['Color'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  llamas?: Resolver<Array<ResolversTypes['Llama']>, ParentType, ContextType>;
-}>;
-
 export type Resolvers<ContextType = any> = ResolversObject<{
   Llama?: LlamaResolvers<ContextType>;
-  Query?: QueryResolvers<ContextType>;
+  Saddle?: SaddleResolvers<ContextType>;
 }>;
 

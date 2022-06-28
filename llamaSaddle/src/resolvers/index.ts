@@ -1,5 +1,5 @@
-import Query from "./query";
+import Llama from "./llama";
 // Resolver abstraction.
 export default {
-  Query,
+  Llama,
 };

@@ -6,6 +6,7 @@ import typeDefs from "./src/schema/schema";
 import CreateApolloSubgraphServer from "./src/serverFactory";
 import { config } from "dotenv";
 
+// config env.
 config();
 
 const schema: GraphQLSchema = buildSubgraphSchema({ typeDefs, resolvers });

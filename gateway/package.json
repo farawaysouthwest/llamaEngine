@@ -10,16 +10,16 @@
     "test": "jest",
     "watch": "jest --watch",
     "build": "rimraf ./build && tsc",
-    "start": "node build/main.js",
+    "start": "node main.js",
     "codegen": "graphql-codegen"
   },
   "dependencies": {
-    "@apollo/gateway": "^0.48.1",
+    "@apollo/gateway": "^2.0.5",
     "@graphql-tools/utils": "^8.6.1",
     "apollo-datasource": "^3.3.1",
-    "apollo-server": "^3.6.3",
+    "apollo-server": "^3.9.0",
     "dotenv": "^16.0.0",
-    "graphql": "^16.3.0"
+    "graphql": "^16.5.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.4.0",

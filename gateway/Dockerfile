@@ -31,6 +31,9 @@ COPY --chown=node:node --from=builder /app/build ./
 
 # ENV NODE_ENV production
 
+ENV APOLLO_KEY=service:llamas:TH2iXdTsn2oICUPSlBIi7A
+ENV APOLLO_GRAPH_REF=llamas@current
+
 EXPOSE 4000
 
 ENTRYPOINT ["dumb-init", "--"]
