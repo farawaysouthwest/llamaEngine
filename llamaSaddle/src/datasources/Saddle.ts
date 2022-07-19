@@ -6,20 +6,27 @@ export default class SaddleDatasource extends DataSource {
     super();
   }
 
-  public fetchSaddle(id: string): Saddle | undefined {
-    const saddles: Saddle[] = [
+  public fetchSaddle(id: string, furColor: string): Saddle | undefined {
+    const saddles = [
       {
-        id: "1",
-        color: Color.Black,
+        id: "100",
+        color: Color.Brown,
         name: "black leather saddle",
       },
       {
-        id: "2",
+        id: "200",
         color: Color.Brown,
         name: "brown blanket saddle",
       },
-    ];
+    ] as Saddle[];
 
-    return saddles.find((saddle) => saddle.id === id);
+    return saddles
+      .map(
+        (saddle): Saddle => ({
+          ...saddle,
+          matchFurColor: furColor === saddle.color ? true : false,
+        })
+      )
+      .find((saddle) => saddle.id === id);
   }
 }

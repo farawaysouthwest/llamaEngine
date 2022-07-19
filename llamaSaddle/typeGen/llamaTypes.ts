@@ -20,6 +20,8 @@ export enum Color {
 
 export type Llama = {
   __typename?: 'Llama';
+  furColor: Scalars['String'];
+  id: Scalars['ID'];
   saddle?: Maybe<Saddle>;
   saddleId: Scalars['ID'];
 };
@@ -28,6 +30,7 @@ export type Saddle = {
   __typename?: 'Saddle';
   color: Color;
   id: Scalars['ID'];
+  matchFurColor: Scalars['Boolean'];
   name: Scalars['String'];
 };
 
@@ -119,6 +122,8 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type LlamaResolvers<ContextType = any, ParentType extends ResolversParentTypes['Llama'] = ResolversParentTypes['Llama']> = ResolversObject<{
+  furColor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   saddle?: Resolver<Maybe<ResolversTypes['Saddle']>, ParentType, ContextType>;
   saddleId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -127,6 +132,7 @@ export type LlamaResolvers<ContextType = any, ParentType extends ResolversParent
 export type SaddleResolvers<ContextType = any, ParentType extends ResolversParentTypes['Saddle'] = ResolversParentTypes['Saddle']> = ResolversObject<{
   color?: Resolver<ResolversTypes['Color'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  matchFurColor?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

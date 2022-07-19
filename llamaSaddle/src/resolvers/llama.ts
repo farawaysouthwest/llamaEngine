@@ -1,10 +1,16 @@
+import { consumers } from "stream";
 import { Llama } from "../../typeGen/llamaTypes";
 
 export default {
   __resolveReference: (llama: Llama) => {
-    return { id: llama.saddleId };
+    console.log(llama);
+    return { id: llama.saddleId, furColor: llama.furColor };
   },
-  saddle: ({ id }: { id: string }, _: any, { dataSources }: any) => {
-    return dataSources.saddles.fetchSaddle(id);
+  saddle: (
+    { id, furColor }: { id: string; furColor: string },
+    _: any,
+    { dataSources }: any
+  ) => {
+    return dataSources.saddles.fetchSaddle(id, furColor);
   },
 };
