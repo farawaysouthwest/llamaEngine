@@ -11,13 +11,13 @@ export default class LlamaDatasource extends DataSource {
       id: "1",
       furColor: "brown",
       name: "Cusco",
-      saddleId: "1",
+      saddleId: "100",
     },
     {
       id: "34",
       furColor: "white",
       name: "Javier",
-      saddleId: "2",
+      saddleId: "200",
     },
   ];
 

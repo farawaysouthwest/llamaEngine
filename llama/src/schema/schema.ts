@@ -5,7 +5,7 @@ export default gql`
     llamas: [Llama!]!
   }
 
-  type Llama {
+  type Llama @key(fields: "id") @key(fields: "saddleId") {
     id: ID!
     name: String!
     furColor: String!
