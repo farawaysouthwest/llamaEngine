@@ -27,6 +27,7 @@ export default function CreateApolloGateway(
                 message: error.message,
                 name: error.name,
                 extensions: error.extensions,
+                service: "graphql-gateway",
               });
             }
           }
