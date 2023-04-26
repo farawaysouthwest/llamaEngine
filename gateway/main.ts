@@ -1,8 +1,8 @@
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
 import CreateApolloGateway from "./src/serverFactory";
 import { config } from "dotenv";
 import { createLogger, transports } from "winston";
+import express, { ErrorRequestHandler } from "express";
+import http from "http";
 
 // config env.
 config();
@@ -11,13 +11,22 @@ const logger = createLogger({
   transports: [new transports.Console()],
 });
 
-const server: ApolloServer = CreateApolloGateway(logger);
+const server = CreateApolloGateway(logger);
 
-// run server.
-startStandaloneServer(server)
-  .then(({ url }) => {
-    logger.info(`🚀 Gateway ready at ${url}`);
-  })
-  .catch((err) => {
-    logger.error(err);
+const app = express();
+const httpServer = http.createServer(app);
+
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  logger.error({ message: err.message });
+  next(err);
+};
+
+server.start().then(() => {
+  app.use(errorHandler);
+  server.applyMiddleware({ app });
+  httpServer.listen({ port: 4000 }, () => {
+    logger.info(
+      `🚀 Server ready at http://localhost:${4000}${server.graphqlPath}`
+    );
   });
+});

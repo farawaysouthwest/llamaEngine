@@ -1,5 +1,6 @@
 import { ApolloGateway } from "@apollo/gateway";
-import { ApolloServer, BaseContext, ApolloServerPlugin } from "@apollo/server";
+import { ApolloServer } from "apollo-server-express";
+import { PluginDefinition } from "apollo-server-core";
 import { readFileSync } from "fs";
 import { Logger } from "winston";
 
@@ -11,11 +12,9 @@ const supergraphSdl = readFileSync("./schema.graphql").toString();
  *
  * @returns ApolloServer with federation gateway config.
  */
-export default function CreateApolloGateway(
-  logger: Logger
-): ApolloServer<BaseContext> {
+export default function CreateApolloGateway(logger: Logger): ApolloServer {
   // error plugin.
-  const errorPlugin: ApolloServerPlugin<BaseContext> = {
+  const errorPlugin: PluginDefinition = {
     async requestDidStart() {
       return {
         async didEncounterErrors({ errors }) {
@@ -23,12 +22,8 @@ export default function CreateApolloGateway(
             for (const error of errors) {
               // log GraphQLErrors. Noteworthy properties to log include:
               // error.name, error.message, error.extensions
-              logger.error({
-                message: error.message,
-                name: error.name,
-                extensions: error.extensions,
-                service: "graphql-gateway",
-              });
+              //logger.error(error.message);
+              throw new Error(error.message);
             }
           }
         },
