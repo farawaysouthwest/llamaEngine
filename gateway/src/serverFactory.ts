@@ -2,6 +2,7 @@ import { ApolloGateway } from "@apollo/gateway";
 import { ApolloServer, BaseContext, ApolloServerPlugin } from "@apollo/server";
 import { readFileSync } from "fs";
 import { Logger } from "winston";
+import { ObservableCache } from "./observableCache";
 
 const supergraphSdl = readFileSync("./schema.graphql").toString();
 
@@ -36,9 +37,25 @@ export default function CreateApolloGateway(
     },
   };
 
-  const gateway = new ApolloGateway({ supergraphSdl });
+  const gateway = new ApolloGateway({
+    supergraphSdl,
+    queryPlannerConfig: {
+      cache: new ObservableCache(logger),
+    },
+  });
 
   const server = new ApolloServer({ gateway, plugins: [errorPlugin] });
 
   return server;
+}
+
+function queryPlannerObserver(server: ApolloServer) {
+  const plugin: ApolloServerPlugin<BaseContext> = {
+    async requestDidStart() {
+      const gateway = Object.keys(server["internals"]);
+      console.log(gateway);
+    },
+  };
+
+  return plugin;
 }

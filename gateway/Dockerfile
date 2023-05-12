@@ -28,6 +28,7 @@ USER node
 COPY --chown=node:node --from=builder /app/node_modules ./node_modules
 COPY --chown=node:node --from=builder /app/package.json ./package.json
 COPY --chown=node:node --from=builder /app/build ./
+COPY --chown=node:node ./schema.graphql ./schema.graphql
 
 # ENV NODE_ENV production
 
